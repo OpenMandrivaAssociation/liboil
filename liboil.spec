@@ -1,8 +1,8 @@
 %define name liboil
-%define version 0.3.10
+%define version 0.3.11
 %define major 0.3
 %define libname %mklibname oil %major
-%define release %mkrel 2
+%define release %mkrel 1
 
 Summary: Optimized functions for multimedia calculations
 Name: %{name}
