@@ -1,5 +1,5 @@
 %define name liboil
-%define version 0.3.11
+%define version 0.3.12
 %define major 0.3
 %define libname %mklibname oil %major
 %define release %mkrel 1
