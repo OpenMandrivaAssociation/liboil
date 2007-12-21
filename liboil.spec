@@ -13,6 +13,7 @@ Source0: http://www.schleef.org/liboil/download/%{name}-%{version}.tar.bz2
 Patch: liboil-nosse.patch
 License: LGPL
 Group: System/Libraries
+BuildRoot: %{_tmppath}/%{name}-buildroot
 URL: http://www.schleef.org/liboil/
 BuildRequires: gtk-doc
 BuildRequires: glib2-devel
