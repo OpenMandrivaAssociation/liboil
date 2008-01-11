@@ -11,13 +11,13 @@ Release: %{release}
 Source0: http://www.schleef.org/liboil/download/%{name}-%{version}.tar.bz2
 # gw disable SSE until bug #26183 is fixed
 Patch: liboil-nosse.patch
+Patch1: %{name}-0.3.12-optflags.patch
 License: LGPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
 URL: http://www.schleef.org/liboil/
 BuildRequires: gtk-doc
 BuildRequires: glib2-devel
-BuildRequires: automake1.9
 
 %description
 Liboil is a library of simple functions that are optimized for various
@@ -92,9 +92,15 @@ This contains the binaries that are bundled with %name.
 cd liboil
 %patch
 cd ..
-automake
+%patch1 -p1
 
 %build
+./autogen.sh
+
+# (tpg) nuke rpath
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+
 %configure2_5x
 #gw no parallel build please
 make
@@ -128,5 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 %files tools
 %defattr(-,root,root)
 %_bindir/*
+
 
 
