@@ -1,23 +1,23 @@
-%define name liboil
-%define version 0.3.12
-%define major 0.3
-%define libname %mklibname oil %major
-%define release %mkrel 1
+%define apiver 0.3
+%define major 0
+%define libname %mklibname oil %{apiver} %{major}
+%define develname %mklibname oil -d
+%define staticname %mklibname oil -d -s
 
-Summary: Optimized functions for multimedia calculations
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: http://www.schleef.org/liboil/download/%{name}-%{version}.tar.bz2
+Summary:	Optimized functions for multimedia calculations
+Name:		liboil
+Version:	0.3.12
+Release:	%mkrel 2
+License:	BSD
+Group:		System/Libraries
+URL:		http://liboil.freedesktop.org
+Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.bz2
 # gw disable SSE until bug #26183 is fixed
-Patch: liboil-nosse.patch
-Patch1: %{name}-0.3.12-optflags.patch
-License: LGPL
-Group: System/Libraries
-BuildRoot: %{_tmppath}/%{name}-buildroot
-URL: http://www.schleef.org/liboil/
-BuildRequires: gtk-doc
-BuildRequires: glib2-devel
+Patch:		liboil-nosse.patch
+Patch1:		%{name}-0.3.12-optflags.patch
+BuildRequires:	gtk-doc
+BuildRequires:	glib2-devel
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Liboil is a library of simple functions that are optimized for various
@@ -28,12 +28,14 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-%package -n %libname
-Summary: Optimized functions for multimedia calculations
-Group: System/Libraries
-Requires: %name-tools >= %version
+%package -n %{libname}
+Summary:	Optimized functions for multimedia calculations
+Group:		System/Libraries
+Requires:	%{name}-tools >= %{version}-%{release}
+Obsoletes:	%mklibname oil 0.3
+Provides:	%mklibname oil 0.3
 
-%description -n %libname
+%description -n %{libname}
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
@@ -42,13 +44,15 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-%package -n %libname-devel
-Summary: Optimized functions for multimedia calculations
-Group: Development/C
-Requires: %libname = %version
-Provides: liboil-devel = %version-%release
+%package -n %{develname}
+Summary:	Optimized functions for multimedia calculations
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	liboil-devel = %{version}-%{release}
+Obsoletes:	%mklibname oil 0.3 -d
+Provides:	%mklibname oil 0.3 -d
 
-%description -n %libname-devel
+%description -n %{develname}
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
@@ -58,12 +62,14 @@ optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
 
-%package -n %libname-static-devel
-Summary: Optimized functions for multimedia calculations
-Group: Development/C
-Requires: %libname-devel = %version
+%package -n %{staticname}
+Summary:	Optimized functions for multimedia calculations
+Group:		Development/C
+Requires:	%{libname}-devel = %{version}-%{release}
+Obsoletes:	%mklibname oil 0.3 -d -s
+Provides:	%mklibname oil 0.3 -d -s
 
-%description -n %libname-static-devel
+%description -n %{staticname}
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
@@ -85,7 +91,7 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-This contains the binaries that are bundled with %name.
+This contains the binaries that are bundled with %{name}.
 
 %prep
 %setup -q
@@ -103,37 +109,35 @@ sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 %configure2_5x
 #gw no parallel build please
-make
+# (tpg) this dirty hack solves this :)
+%(echo %make|perl -pe 's/-j\d+/-j1/g')
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post -n %libname -p /sbin/ldconfig
 %postun -n %libname -p /sbin/ldconfig
 
-%files -n %libname
+%files -n %{libname}
 %defattr(-,root,root)
-%_libdir/liboil-%{major}.so.0*
+%{_libdir}/liboil-%{apiver}.so.%{major}*
 
-%files -n %libname-devel
+%files -n %{develname}
 %defattr(-,root,root)
-%_includedir/liboil*
-%_libdir/liboil*.so
-%attr(644,root,root) %_libdir/liboil*.la
-%_libdir/pkgconfig/*.pc
-%_datadir/gtk-doc/html/liboil
+%{_includedir}/liboil*
+%{_libdir}/liboil*.so
+%attr(644,root,root) %{_libdir}/liboil*.la
+%{_libdir}/pkgconfig/*.pc
+%{_datadir}/gtk-doc/html/liboil
 
-%files -n %libname-static-devel
+%files -n %{staticname}
 %defattr(-,root,root)
-%_libdir/liboil*.a
+%{_libdir}/liboil*.a
 
 %files tools
 %defattr(-,root,root)
-%_bindir/*
-
-
-
+%{_bindir}/*
