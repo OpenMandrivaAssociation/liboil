@@ -7,7 +7,7 @@
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.12
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
