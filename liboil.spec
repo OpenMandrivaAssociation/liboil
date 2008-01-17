@@ -7,7 +7,7 @@
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.12
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
@@ -33,7 +33,6 @@ Summary:	Optimized functions for multimedia calculations
 Group:		System/Libraries
 Requires:	%{name}-tools >= %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3
-Provides:	%mklibname oil 0.3
 
 %description -n %{libname}
 Liboil is a library of simple functions that are optimized for various
@@ -50,7 +49,6 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	liboil-devel = %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3 -d
-Provides:	%mklibname oil 0.3 -d
 
 %description -n %{develname}
 Liboil is a library of simple functions that are optimized for various
@@ -65,9 +63,8 @@ instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 %package -n %{staticname}
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
-Requires:	%{libname}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3 -d -s
-Provides:	%mklibname oil 0.3 -d -s
 
 %description -n %{staticname}
 Liboil is a library of simple functions that are optimized for various
