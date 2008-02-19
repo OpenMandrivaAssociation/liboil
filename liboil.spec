@@ -7,14 +7,11 @@
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.12
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
 Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.bz2
-# gw disable SSE until bug #26183 is fixed
-Patch:		liboil-nosse.patch
-Patch1:		%{name}-0.3.12-optflags.patch
 BuildRequires:	gtk-doc
 BuildRequires:	glib2-devel
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -92,22 +89,19 @@ This contains the binaries that are bundled with %{name}.
 
 %prep
 %setup -q
-cd liboil
-%patch
-cd ..
-%patch1 -p1
 
 %build
-./autogen.sh
+# disable omit-frame-pointer, it breaks SSE detection when called from mono (fd.o bug #8529)
+CFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
+CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
+ %configure2_5x
 
 # (tpg) nuke rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
-%configure2_5x
 #gw no parallel build please
-# (tpg) this dirty hack solves this :)
-%(echo %make|perl -pe 's/-j\d+/-j1/g')
+make
 
 %install
 rm -rf %{buildroot}
