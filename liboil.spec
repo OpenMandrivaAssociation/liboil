@@ -98,7 +98,7 @@ CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronou
 
 # (tpg) nuke rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+#sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 #gw no parallel build please
 make
