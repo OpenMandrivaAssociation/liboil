@@ -6,12 +6,12 @@
 
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
-Version:	0.3.12
-Release:	%mkrel 5
+Version:	0.3.13
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
-Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.bz2
+Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
 BuildRequires:	gtk-doc
 BuildRequires:	glib2-devel
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -92,8 +92,8 @@ This contains the binaries that are bundled with %{name}.
 
 %build
 # disable omit-frame-pointer, it breaks SSE detection when called from mono (fd.o bug #8529)
-CFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
-CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
+#CFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
+#CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
  %configure2_5x
 
 # (tpg) nuke rpath
