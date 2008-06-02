@@ -6,7 +6,7 @@
 
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
-Version:	0.3.13
+Version:	0.3.14
 Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
@@ -96,16 +96,14 @@ This contains the binaries that are bundled with %{name}.
 #CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
  %configure2_5x
 
-# (tpg) nuke rpath
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-#sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-
-#gw no parallel build please
-make
+%make
 
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+
+%check
+make check
 
 %clean
 rm -rf %{buildroot}
