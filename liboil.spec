@@ -6,8 +6,8 @@
 
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
-Version:	0.3.16
-Release:	%mkrel 3
+Version:	0.3.17
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
@@ -91,10 +91,7 @@ This contains the binaries that are bundled with %{name}.
 %setup -q
 
 %build
-# disable omit-frame-pointer, it breaks SSE detection when called from mono (fd.o bug #8529)
-#CFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
-#CXXFLAGS="`echo %optflags |sed -e 's/-fomit-frame-pointer//' -e 's/-fasynchronous-unwind-tables//'`" \
- %configure2_5x
+%configure2_5x
 
 %make
 
