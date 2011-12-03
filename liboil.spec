@@ -28,7 +28,6 @@ instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 %package -n %{libname}
 Summary:	Optimized functions for multimedia calculations
 Group:		System/Libraries
-Requires:	%{name}-tools >= %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3
 
 %description -n %{libname}
