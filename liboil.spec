@@ -42,7 +42,7 @@ instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	liboil-devel = %{version}-%{release}
+Provides:	oil-devel = %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3 -d
 
 %description -n	%{develname}
