@@ -7,14 +7,13 @@
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.17
-Release:	%mkrel 2
+Release:	2
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
 Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
 BuildRequires:	gtk-doc
 BuildRequires:	glib2-devel
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Liboil is a library of simple functions that are optimized for various
@@ -95,21 +94,15 @@ This contains the binaries that are bundled with %{name}.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 %check
 make check
 
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/liboil-%{apiver}.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/liboil*
 %{_libdir}/liboil*.so
 %attr(644,root,root) %{_libdir}/liboil*.la
@@ -117,9 +110,7 @@ rm -rf %{buildroot}
 %{_datadir}/gtk-doc/html/liboil
 
 %files -n %{staticname}
-%defattr(-,root,root)
 %{_libdir}/liboil*.a
 
 %files tools
-%defattr(-,root,root)
 %{_bindir}/*
