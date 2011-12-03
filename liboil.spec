@@ -13,7 +13,7 @@ Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
 Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
 BuildRequires:	gtk-doc
-BuildRequires:	glib2-devel
+BuildRequires:	pkgconfig(glib-2.0)
 
 %description
 Liboil is a library of simple functions that are optimized for various
