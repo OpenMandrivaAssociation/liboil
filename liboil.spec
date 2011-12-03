@@ -41,8 +41,8 @@ instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 %package -n	%{develname}
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Provides:	oil-devel = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
+Provides:	oil-devel = %{EVRD}
 Obsoletes:	%mklibname oil 0.3 -d
 
 %description -n	%{develname}
@@ -58,7 +58,7 @@ instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 %package -n	%{staticname}
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
-Requires:	%{develname} = %{version}-%{release}
+Requires:	%{develname} = %{EVRD}
 Obsoletes:	%mklibname oil 0.3 -d -s
 
 %description -n %{staticname}
