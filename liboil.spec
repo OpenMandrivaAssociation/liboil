@@ -24,12 +24,12 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-%package -n %{libname}
+%package -n	%{libname}
 Summary:	Optimized functions for multimedia calculations
 Group:		System/Libraries
 Obsoletes:	%mklibname oil 0.3
 
-%description -n %{libname}
+%description -n	%{libname}
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
@@ -38,14 +38,14 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-%package -n %{develname}
+%package -n	%{develname}
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	liboil-devel = %{version}-%{release}
 Obsoletes:	%mklibname oil 0.3 -d
 
-%description -n %{develname}
+%description -n	%{develname}
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
@@ -55,7 +55,7 @@ optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
 
-%package -n %{staticname}
+%package -n	%{staticname}
 Summary:	Optimized functions for multimedia calculations
 Group:		Development/C
 Requires:	%{develname} = %{version}-%{release}
@@ -70,11 +70,11 @@ numbers. Clearly such functions are candidates for significant
 optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
-%package tools
-Summary: Optimized functions for multimedia calculations
-Group: System/Libraries
+%package	tools
+Summary:	Optimized functions for multimedia calculations
+Group:		System/Libraries
 
-%description tools
+%description	tools
 Liboil is a library of simple functions that are optimized for various
 CPUs. These functions are generally loops implementing simple
 algorithms, such as converting an array of N integers to
