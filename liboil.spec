@@ -1,13 +1,15 @@
+%define _disable_ld_no_undefined 1
+%define _disable_lto 1
+
 %define apiver 0.3
 %define major 0
 %define libname %mklibname oil %{apiver} %{major}
 %define develname %mklibname oil -d
-%define staticname %mklibname oil -d -s
 
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.17
-Release:	6
+Release:	7
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
@@ -55,21 +57,6 @@ optimization using various techniques, especially by using extended
 instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
 
 
-%package -n	%{staticname}
-Summary:	Optimized functions for multimedia calculations
-Group:		Development/C
-Requires:	%{develname} = %{EVRD}
-Obsoletes:	%mklibname oil 0.3 -d -s
-
-%description -n %{staticname}
-Liboil is a library of simple functions that are optimized for various
-CPUs. These functions are generally loops implementing simple
-algorithms, such as converting an array of N integers to
-floating-poing numbers or multiplying and summing an array of N
-numbers. Clearly such functions are candidates for significant
-optimization using various techniques, especially by using extended
-instructions provided by modern CPUs (Altivec, MMX, SSE, etc.).
-
 %package	tools
 Summary:	Optimized functions for multimedia calculations
 Group:		System/Libraries
@@ -89,15 +76,15 @@ This contains the binaries that are bundled with %{name}.
 %setup -q
 
 %build
-%configure2_5x
+export CC=gcc
+export CXX=g++
+%configure
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
-%check
-make check
 
 %files -n %{libname}
 %{_libdir}/liboil-%{apiver}.so.%{major}*
@@ -107,9 +94,6 @@ make check
 %{_libdir}/liboil*.so
 %{_libdir}/pkgconfig/*.pc
 %{_datadir}/gtk-doc/html/liboil
-
-%files -n %{staticname}
-%{_libdir}/liboil*.a
 
 %files tools
 %{_bindir}/*
