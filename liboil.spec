@@ -89,6 +89,8 @@ This contains the binaries that are bundled with %{name}.
 %setup -q
 
 %build
+export CC=gcc
+export CXX=g++
 %configure2_5x
 
 %make
