@@ -1,3 +1,6 @@
+%define _disable_ld_no_undefined 1
+%define _disable_lto 1
+
 %define apiver 0.3
 %define major 0
 %define libname %mklibname oil %{apiver} %{major}
