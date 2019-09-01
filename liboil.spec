@@ -92,14 +92,14 @@ This contains the binaries that are bundled with %{name}.
 %setup -q
 
 %build
-export CC=gcc
-export CXX=g++
-%configure2_5x
+#export CC=gcc
+#export CXX=g++
+%configure
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %check
 make check
