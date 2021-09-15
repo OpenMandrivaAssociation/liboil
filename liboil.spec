@@ -1,3 +1,5 @@
+%global optflags %{optflags} -fheinous-gnu-extensions
+
 %define _disable_ld_no_undefined 1
 %define _disable_lto 1
 
@@ -9,7 +11,7 @@
 Summary:	Optimized functions for multimedia calculations
 Name:		liboil
 Version:	0.3.17
-Release:	7
+Release:	8
 License:	BSD
 Group:		System/Libraries
 URL:		http://liboil.freedesktop.org
@@ -76,8 +78,6 @@ This contains the binaries that are bundled with %{name}.
 %setup -q
 
 %build
-export CC=gcc
-export CXX=g++
 %configure
 
 %make_build
