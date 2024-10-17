@@ -14,7 +14,7 @@ Version:	0.3.17
 Release:	8
 License:	BSD
 Group:		System/Libraries
-URL:		http://liboil.freedesktop.org
+URL:		https://liboil.freedesktop.org
 Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
 BuildRequires:	gtk-doc
 BuildRequires:	pkgconfig(glib-2.0)
