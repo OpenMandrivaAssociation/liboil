@@ -16,6 +16,11 @@ License:	BSD
 Group:		System/Libraries
 URL:		https://liboil.freedesktop.org
 Source0:	http://liboil.freedesktop.org/download/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gtk-doc
 BuildRequires:	pkgconfig(glib-2.0)
 
